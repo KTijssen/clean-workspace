@@ -20,7 +20,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Clean Working dir
-        uses: BRO/clean-workspace@v1
+        uses: ktijssen/clean-workspace@v1
       - name: Checkout Project Repo
         uses: actions/checkout@v3
       - run: echo Hello World

@@ -49,7 +49,6 @@ jobs:
           PATCH: ${{ inputs.patch }}
           COMMIT_ID: ${{ inputs.commitId }}
         run: |
-          set -x
           if [ $(git cat-file -t ${COMMIT_ID}) ]; then
             echo "Commit gevonden."
           else
@@ -73,10 +72,9 @@ jobs:
     runs-on: [self-hosted]
     environment:
       name: major-minor-patch
-    timeout-minutes: 5
     steps:
-      - name: Clean Working dir
-        uses: BRO/clean-workspace@v1
+      #- name: Clean Working dir
+      #  uses: ktijssen/clean-workspace@v1
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Major.Minor.Patch taggen?
@@ -87,8 +85,6 @@ jobs:
           PATCH: ${{ inputs.patch }}
           COMMIT_ID: ${{ inputs.commitId }}
         run: |
-          git config --global user.email "noreply@tno.nl"
-          git config --global user.name "GitHubActions Pipeline"
           git tag -f -a "v${MAJOR}.${MINOR}.${PATCH}" -m "v${MAJOR}.${MINOR}.${PATCH}" ${COMMIT_ID}
           git push origin --tags --force --quiet
 
@@ -97,11 +93,11 @@ jobs:
     needs: major-minor-patch
     runs-on: [self-hosted]
     environment:
-      name: major-minor
+      name: major-minor-patch
     timeout-minutes: 1440
     steps:
-      - name: Clean Working dir
-        uses: BRO/clean-workspace@v1
+      #- name: Clean Working dir
+      #  uses: ktijssen/clean-workspace@v1
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Major.Minor taggen?
@@ -111,8 +107,6 @@ jobs:
           MINOR: ${{ inputs.minor }}
           COMMIT_ID: ${{ inputs.commitId }}
         run: |
-          git config --global user.email "noreply@tno.nl"
-          git config --global user.name "GitHubActions Pipeline"
           git tag -f -a "v${MAJOR}.${MINOR}" -m "v${MAJOR}.${MINOR}" ${COMMIT_ID}
           git push origin --tags --force --quiet
 
@@ -121,11 +115,10 @@ jobs:
     needs: major-minor
     runs-on: [self-hosted]
     environment:
-      name: major
-    timeout-minutes: 1440
+      name: major-minor-patch
     steps:
-      - name: Clean Working dir
-        uses: BRO/clean-workspace@v1
+      #- name: Clean Working dir
+      #  uses: ktijssen/clean-workspace@v1
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Major taggen?
@@ -134,7 +127,5 @@ jobs:
           MAJOR: ${{ inputs.major }}
           COMMIT_ID: ${{ inputs.commitId }}
         run: |
-          git config --global user.email "noreply@tno.nl"
-          git config --global user.name "GitHubActions Pipeline"
           git tag -f -a "v${MAJOR}" -m "v${MAJOR}" ${COMMIT_ID}
           git push origin --tags --force --quiet

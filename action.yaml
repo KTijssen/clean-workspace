@@ -1,6 +1,6 @@
 name: Clean Workspace
 description: Delete all files in the _work folder
-author: Kevin Tijssen (TNO)
+author: Kevin Tijssen
 
 runs:
   using: "composite"

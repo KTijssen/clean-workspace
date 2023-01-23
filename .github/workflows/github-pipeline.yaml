@@ -1,4 +1,4 @@
-name: clean-workspace
+name: Create new Tag
 
 on:
   workflow_dispatch:

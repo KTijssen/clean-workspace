@@ -85,6 +85,8 @@ jobs:
           PATCH: ${{ inputs.patch }}
           COMMIT_ID: ${{ inputs.commitId }}
         run: |
+          git config --global user.name "GitHubActions Pipeline"
+          git config --global user.email "kevin.tijssen@gmail.com"
           git tag -f -a "v${MAJOR}.${MINOR}.${PATCH}" -m "v${MAJOR}.${MINOR}.${PATCH}" ${COMMIT_ID}
           git push origin --tags --force --quiet
 
@@ -107,6 +109,8 @@ jobs:
           MINOR: ${{ inputs.minor }}
           COMMIT_ID: ${{ inputs.commitId }}
         run: |
+          git config --global user.name "GitHubActions Pipeline"
+          git config --global user.email "kevin.tijssen@gmail.com"
           git tag -f -a "v${MAJOR}.${MINOR}" -m "v${MAJOR}.${MINOR}" ${COMMIT_ID}
           git push origin --tags --force --quiet
 
@@ -127,5 +131,7 @@ jobs:
           MAJOR: ${{ inputs.major }}
           COMMIT_ID: ${{ inputs.commitId }}
         run: |
+          git config --global user.name "GitHubActions Pipeline"
+          git config --global user.email "kevin.tijssen@gmail.com"
           git tag -f -a "v${MAJOR}" -m "v${MAJOR}" ${COMMIT_ID}
           git push origin --tags --force --quiet
